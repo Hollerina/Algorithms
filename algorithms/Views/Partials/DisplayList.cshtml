@@ -1,0 +1,100 @@
+﻿@model algorithms.Models.Partials.DisplayListModel
+@{
+	int index = 0;
+}
+
+<ul class="@Model.className list-parent" data-index="@Model.index" data-position="@Model.position">
+	@foreach (var element2 in Model.numbers)
+	{
+		if(Model.comparison.Count < 1)
+		{
+			if (Model.before_comp.Count < 1)
+			{
+				<li class="list-el first-compare">
+					[@(element2)]
+				</li>
+			}
+			else if (Model.before_comp[0] == index || Model.before_comp[1] == index)
+			{
+				<li class="list-el underlining first-compare">
+					[@(element2)]
+				</li>
+			}
+			else
+			{
+				<li class="list-el first-compare">
+					[@(element2)]
+				</li>
+			}
+
+		}
+		else if(Model.before_comp.Count < 1)
+		{
+			if (Model.comparison[0] == index)
+			{
+				<li class="list-el first-compare">
+					[@(element2)]
+				</li>
+			}
+			else if (Model.comparison[1] == index)
+			{
+				<li class="list-el second-compare">
+					[@(element2)]
+				</li>
+			}
+			else
+			{
+				<li class="list-el">
+					[@(element2)]
+				</li>
+			}
+		}
+		else if(Model.comparison[0] == index)
+		{
+			if (Model.before_comp[0] == index || Model.before_comp[1] == index)
+			{
+				<li class="list-el underlining first-compare">
+					[@(element2)]
+				</li>
+			}
+			else
+			{
+				<li class="list-el first-compare">
+					[@(element2)]
+				</li>
+			}
+		}
+		else if(Model.comparison[1] == index)
+		{
+			if (Model.before_comp[0] == index || Model.before_comp[1] == index)
+			{
+				<li class="list-el underlining second-compare">
+					[@(element2)]
+				</li>
+			}
+			else
+			{
+				<li class="list-el second-compare">
+					[@(element2)]
+				</li>
+			}
+		}
+		else
+		{
+			if (Model.before_comp[0] == index || Model.before_comp[1] == index)
+			{
+				<li class="list-el underlining">
+					[@(element2)]
+				</li>
+			}
+			else
+			{
+				<li class="list-el">
+					[@(element2)]
+				</li>
+			}
+		}
+		index += 1;
+
+	}
+</ul>

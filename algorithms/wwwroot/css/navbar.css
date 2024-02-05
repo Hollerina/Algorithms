@@ -1,0 +1,16 @@
+﻿.border-bottom{
+    border-bottom: 3px solid var(--accessory-colour) !important;
+}
+
+.border-top {
+    border-top: 3px solid var(--nav-colour) !important;
+}
+
+.navbar-light {
+    color: var(--background-colour) !important;
+}
+
+.navbar{
+    background-color: var(--nav-colour) !important;
+    
+}

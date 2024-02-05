@@ -1,0 +1,216 @@
+﻿@using algorithms.Models.Partials
+@model algorithms.Models.BubbleModel
+@{
+	int index = 0;
+}
+
+@if(Model == null){
+	<div class="container text-center">
+		<h1 class="title">Bubble Sort</h1>
+		<div class="description">
+			<div class="row text-start">
+				<div class="col inner-col-left">
+					<h2 class="lower-title">What is Bubble Sort?</h2>
+					<p class="paragraph-desc">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+				<div class="col inner-col-right">
+					<h2 class="lower-title">How does this Work?</h2>
+					<p class="paragraph-desc">
+						Input a list of numbers you wish for the Bubble Sort to sort. The input must be in the form of 1,2,3,4,5 where each number is seperated by a comma. Once a list has been inputed press the submit button to take you to the step walkthrough and more detalied explanation of the Bubble Sort algorithm. If the list inputed is more than 12 numbers a graph demenstration is presented rather than a list. For less than 12 , the underlines represent the elements which were sorted on the previous step, while the coloured elements represent elements which will be sorted next.
+					</p>
+				</div>
+			</div>
+		</div>
+		@using (Html.BeginForm("BubbleSort", "Sorting", FormMethod.Post))
+		{
+			<input type="text" name="BubbleList" class="text-center" placeholder="Enter input..." />
+
+			<input type="submit" name="submitButton" value="Full Step by Step" />
+			<input type="submit" name="submitButton" value="Swap Steps only" />
+		}
+	</div>
+
+}
+else
+{
+	
+	<div class="container text-center main-body">
+		<h1 class="title">Bubble Sort</h1>
+		<div class="row">
+			<div class="col alg-left">
+				
+					
+					@if(Model.Bubbles[0].Count < 12)
+					{
+						<div class="row alg-sim align-items-center justify-content-center">
+							@foreach (var element in Model.Bubbles)
+							{
+								if (Model.Bubbles.Count == 1)
+								{
+									var displayModel = new DisplayListModel(element, "shown", index, "only", Model.compared[index], Model.compared[index]);
+									<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+								}
+								else if (index == 0)
+								{
+									var displayModel = new DisplayListModel(element, "shown", index, "start", Model.compared[index], new List<int>());
+									<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+								}
+								else if (index == Model.Bubbles.Count - 1)
+								{
+									if (Model.compared[index - 1].Count > 2)
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "end", new List<int>(), new List<int>());
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+									else
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "end", new List<int>(), Model.compared[index - 1]);
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+
+								}
+								else if (index == Model.Bubbles.Count - 2)
+								{
+									if (Model.compared[index - 1].Count > 2)
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "second-last", Model.compared[index], new List<int>());
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+									else
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "second-last", Model.compared[index], Model.compared[index - 1]);
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+
+								}
+								else if (index == 1)
+								{
+									if (Model.compared[index - 1].Count > 2)
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "second", Model.compared[index], new List<int>());
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+									else
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "second", Model.compared[index], Model.compared[index - 1]);
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+
+								}
+								else
+								{
+									if (Model.compared[index - 1].Count > 2)
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "", Model.compared[index], new List<int>());
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+									else
+									{
+										var displayModel = new DisplayListModel(element, "hidden", index, "", Model.compared[index], Model.compared[index - 1]);
+										<partial name="~/Views/Partials/DisplayList.cshtml" model="displayModel" />
+									}
+
+								}
+
+								index += 1;
+							}
+						</div>
+						<div class="controls row  align-items-center justify-content-center">
+							<button class="action-button left-button" onclick="prev()">&#8592; Back</button>
+							<button class="action-button right-button" onclick="next()">Next &#8594;</button>
+						</div>
+					}
+					else
+					{
+						<div class="row alg-sim align-items-center justify-content-center">
+							<canvas id="chartId" aria-label="chart"></canvas>
+						</div>
+						<div class="controls row  align-items-center justify-content-center">
+							<button class="action-button left-button" onclick="prev_graph()">&#8592; Back</button>
+							<button class="action-button right-button" onclick="next_graph()">Next &#8594;</button>
+						</div>
+					}
+				<script>
+					const bubble_array = @Html.Raw(Json.Serialize(Model.Bubbles));
+					const comparison_array = @Html.Raw(Json.Serialize(Model.compared));
+					
+				</script>
+				
+				
+			</div>
+			<div class="col alg-right">
+				<h2 class="lower-title underlining coloured-underline">Results</h2>
+				<div class="steps-desc text-start">
+					<div class="results">
+						<h3 class="sub-heading more-margin">
+							What does it show?
+						</h3>
+						<p class="alg-desc">
+							A list of the elements performing Bubble sort/ Graph showing Bubble sort. Below shows a step by step explanation of what the algorithm is doing.
+						</p>
+					</div>
+					<div class="results">
+						<h3 id="current-step" class="sub-heading">
+							Step 1 :
+						</h3>
+						<div class="steps-taken">
+							<ul class="alg-desc">
+								<li id="current-comparison">
+									<span class="d-inline bold" id="curr-first">@Model.Bubbles[0][Model.compared[0][0]]</span>
+									 @( "is being compared to ")
+									<span class="d-inline bold" id="curr-last">@Model.Bubbles[0][Model.compared[0][1]]</span>
+									@(", at indexes ")
+									<span class="d-inline bold" id="index-first">@Model.compared[0][0]</span>
+									@(" and ")
+									<span class="d-inline bold" id="index-last">@Model.compared[0][1]</span>
+								</li>
+								<li id="now-step">
+									@if (Model.compared[0].Count < 3)
+									{
+										<span id="now-first" class="d-inline first-compare">@Model.Bubbles[0][Model.compared[0][0]]</span>
+										<span id="text-now"> will be swapped with </span>
+										<span class="d-inline first-compare" id="now-last">@Model.Bubbles[0][Model.compared[0][1]]</span>
+									}
+									else
+									{
+										<span id="now-first" class="d-inline first-compare"></span>
+										<span id="text-now">No swap previously made</span>
+										<span class="d-inline first-compare" id="now-last"></span>
+									}
+								</li>
+								<li id="previous-step">
+									<span id="prev-first" class="d-inline underlining-desc"></span>
+									<span id="text-prev"> No swap previously made </span>
+									<span class="d-inline underlining-desc" id="prev-last"></span>
+								</li>
+								<li id="final-step" class="hidden">
+									Bubble Sort Complete
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="results ">
+						<p class="alg-desc">Comparisons : This Bubble sort takes @Model.comparisons swaps to complete. </p>
+						<p class="alg-desc">Bubbles: The algorithm took @Model.stepstaken run throughs of the array before completion</p>
+					</div>
+				</div>
+				
+				
+				
+
+				@using (Html.BeginForm("Bubble", "Sorting", FormMethod.Post))
+				{
+
+					<input class="restart" type="submit" value="Restart" />
+				}
+			</div>
+		</div>
+	</div>
+	<script src="~/js/Helpers.js" type="text/javascript"></script>
+	<script src="~/js/ButtonActions.js" type="text/javascript"></script>
+	
+	<script src="~/js/Rendering.js" type="text/javascript"></script>
+	
+}

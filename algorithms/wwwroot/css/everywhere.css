@@ -1,0 +1,226 @@
+﻿:root {
+    --background-colour: #202020;
+    --border-colour: #679D8E;
+    --nav-colour: #5A877A;
+    --font-colour: #F3FFFB;
+    --accessory-colour: #7fbeab;
+    --accessory-colour2: #671d1b;
+    --background-element: #2E2E2E;
+}
+
+body{
+    background-color: var(--background-colour);
+}
+
+/*-------Title-------*/
+.title {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 80px;
+    color: white;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 6px;
+    text-underline-offset: 10px;
+    margin-bottom: 1.5rem;
+}
+
+/*-------Description Box-------*/
+.description{
+    background-color: var(--background-element);
+    width: 100%;
+    border: 2px solid var(--nav-colour);
+    transform: skew(-3deg);
+    border-radius:10px;
+    color: white;
+    margin-bottom:2rem;
+}
+
+.inner-col-left {
+    padding-top: 1.5rem;
+    padding-left: 3rem;
+}
+
+.inner-col-right {
+    padding-top: 1.5rem;
+    padding-right: 2rem;
+}
+
+.lower-title {
+    font-size: 2rem;
+    color: white;
+}
+
+.paragraph-desc {
+    transform: skew(3deg);
+    font-size: 1.2rem;
+}
+
+/*-------Form Input-------*/
+form {
+    height: 3rem;
+}
+input[type=text] {
+    width: 40%;
+    height: 3rem;
+    border: 2.5px solid var(--nav-colour);
+    border-radius:5px;
+    background-color: var(--background-element);
+    color: white;
+    font-size: 1.3rem;
+}
+
+input[type=text]:focus {
+    outline: 2px solid var(--nav-colour);
+}
+
+input[type=submit], .action-button {
+    margin-left: 1%;
+    width: 20%;
+    height: 3rem;
+    background-color: var(--accessory-colour);
+    border: 2.5px solid var(--nav-colour);
+    border-radius: 5px;
+    vertical-align: top;
+    color: white;
+    font-size:1.25rem;
+}
+
+input[type=submit]:hover , .action-button:hover{
+    outline: 2px solid var(--nav-colour);
+}
+
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--background-element) !important;
+}
+
+/*-------Algorithm Layout-------*/
+.alg-left {
+    flex: 3;
+    height: 36.5rem;
+    background-color: var(--background-element);
+    margin-right: 1%;
+    border: 2px solid var(--nav-colour);
+    transform: skew(-1.5deg);
+    border-radius: 10px;
+    color: white;
+}
+
+.alg-right {
+    flex: 2;
+    height: 36.5rem;
+    background-color: var(--background-element);
+    margin-left: 1%;
+    border: 2px solid var(--nav-colour);
+    transform: skew(-1.5deg);
+    border-radius: 10px;
+    color: white;
+}
+
+.list-parent {
+    font-size: 1.5em;
+    transform: skew(1.5deg);
+    text-align: center;
+    padding-left: 0;
+}
+
+.list-el {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.results {
+    margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: var(--nav-colour) dashed 3px;
+    transform: skew(1.5deg);
+}
+
+.alg-desc {
+    font-size: 1.15rem;
+    transform: skew(1.5deg);
+    margin-bottom: 0.5rem;
+}
+
+
+.alg-sim{
+    height: 85%;
+    transform: skew(1.5deg);
+}
+
+.controls {
+    border-top: var(--nav-colour) solid 2px;
+    height: 15%;
+}
+
+.action-button{
+    height:50%;
+    width: 25%;
+}
+
+.left-button{
+    margin-right: 1rem
+}
+
+.right-button {
+    margin-left: 1rem
+}
+
+.sub-heading{
+    font-size: 1.35rem;
+}
+
+
+/*-------Step Colouring-------*/
+.first-compare{
+    color: var(--accessory-colour);
+}
+
+.second-compare{
+    color: var(--nav-colour);
+}
+
+.underlining {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 6px;
+    text-decoration-color: white;
+}
+
+.underlining-desc {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2.5px;
+    text-decoration-color: white;
+}
+
+.bold {
+    font-weight: bold;
+}
+input[type=submit].restart {
+    width: 70% ;
+}
+
+.restart {
+    margin-top: 2rem;
+    
+}
+
+/*-------Higher Priority Rules-------*/
+.more-margin{
+    margin-top: 0.8rem;
+}
+
+.coloured-underline {
+    text-decoration-color: var(--accessory-colour);
+}
+
+/*-------Display Options-------*/
+.shown {
+    display: block;
+}
+
+.hidden{
+    display: none;
+}
